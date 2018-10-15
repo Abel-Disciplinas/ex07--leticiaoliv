@@ -37,8 +37,8 @@ end
 
 function reslu2(A::Matrix, b::Vector)
     n = length(b)
-    for i = 1:n
-        for j = 1:i-1
+    for j = 1:n
+        for i = j+1:n
             b[i] = b[i] - A[i,j] * b[j]
         end
     end
@@ -58,10 +58,10 @@ function reslu3(A::Matrix, b::Vector)
             b[i] = b[i] - A[i,j] * b[j]
         end
     end
-    for j = i+1:n
-        for i = n:-1:1
-             b[i] = b[j] - A[i,j] * b[j]
-             b[i] = b[i] / A[i,i]
+    for j = n:-1:1
+        for i = j-1:-1:1
+            b[i] = b[j] - A[i,j] * b[j]
+            b[i] = b[i] / A[i,i]
         end
     end
     return b
@@ -69,15 +69,15 @@ end
 
 function reslu4(A::Matrix, b::Vector)
     n = length(b)
-    for j = 1:i-1
-        for i = 1:n
+    for j = 1:n
+        for i = j+1:n
             b[i] = b[i] - A[i,j] * b[j]
         end
     end
-    for j = i+1:n
-        for i = n:-1:1
-             b[i] = b[j] - A[i,j] * b[j]
-             b[i] = b[i] / A[i,i]
+    for j = n:-1:1
+        for i = j-1:-1:1
+            b[i] = b[j] - A[i,j] * b[j]
+            b[i] = b[i] / A[i,i]
         end
     end
     return b
